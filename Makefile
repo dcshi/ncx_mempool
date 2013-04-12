@@ -21,19 +21,19 @@ CFLAGS+= -DLOG_LEVEL=4
 TARGET=pool_test
 ALL:$(TARGET)
 
-OBJ= objs/ncx_slab.o
+OBJ= ncx_slab.o
 
-$(TARGET):$(OBJ)  objs/main.o 
+$(TARGET):$(OBJ)  main.o 
 	$(CC)	$(CFLAGS) -o $@ $^ $(LIB)
 
-pool_bench:$(OBJ) objs/bench.o
+pool_bench:$(OBJ) bench.o
 	$(CC)	$(CFLAGS) -o $@ $^ $(LIB)
 
-objs/%.o: %.c
+%.o: %.c
 	$(CC)  $(CFLAGS) $(INC) -c -o $@ $<
 
 clean:
-	rm -f .objs/*
+	rm -f *.o
 	rm -f $(TARGET)
 
 install:
