@@ -77,7 +77,9 @@ ncx_lock.h 是锁接口；根据实际需要重定义: <br/>
 2.多进程共享内存池，可参考nginx的ngx_shmtx.c实现spin lock <br/>
 3.单进程单线程使用内存池，无锁编程..
 
-ngx_log.h 是日志接口，根据实际需要重定义.
+ncx_log.h 是日志接口，根据实际需要重定义.
+
+ncx_slab.c.md 是 ncx_slab.c的详细注释，方便理解.
 
 Author
 ======
