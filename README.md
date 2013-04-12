@@ -79,7 +79,7 @@ ncx_lock.h 是锁接口；根据实际需要重定义: <br/>
 
 ncx_log.h 是日志接口，根据实际需要重定义.
 
-ncx_slab.c.md 是 ncx_slab.c的详细注释，方便理解.
+ncx_slab.c.orz 是 ncx_slab.c的详细注释，方便理解.
 
 Author
 ======

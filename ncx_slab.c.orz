@@ -216,7 +216,7 @@ ncx_slab_alloc_locked(ncx_slab_pool_t *pool, size_t size)
 	 */
     if (size >= ncx_slab_max_size) {
 
-		debug("slab alloc: %uz", size);
+		debug("slab alloc: %zu", size);
 
         page = ncx_slab_alloc_pages(pool, (size >> ncx_pagesize_shift)
                                           + ((size % ncx_pagesize) ? 1 : 0));
@@ -251,8 +251,6 @@ ncx_slab_alloc_locked(ncx_slab_pool_t *pool, size_t size)
         shift = pool->min_shift;
         slot = 0;
     }
-
-	debug("slab alloc: %uz slot: %ui", size, slot);
 
 	/*
 	 * 获取对应的page管理节点链表
@@ -1061,17 +1059,17 @@ ncx_slab_stat(ncx_slab_pool_t *pool, ncx_slab_stat_t *stat)
 	stat->pool_size = pool->end - pool->start;
 	stat->used_pct = stat->used_size * 100 / stat->pool_size;
 
-	info("pool_size : %u bytes",	stat->pool_size);
-	info("used_size : %u bytes",	stat->used_size);
-	info("used_pct  : %u%%\n",		stat->used_pct);
+	info("pool_size : %zu bytes",	stat->pool_size);
+	info("used_size : %zu bytes",	stat->used_size);
+	info("used_pct  : %zu%%\n",		stat->used_pct);
 
-	info("total page count : %u",	stat->pages);
-	info("free page count  : %u\n",	stat->free_page);
+	info("total page count : %zu",	stat->pages);
+	info("free page count  : %zu\n",	stat->free_page);
 		
-	info("small slab use page : %u,\tbytes : %u",	stat->p_small, stat->b_small);	
-	info("exact slab use page : %u,\tbytes : %u",	stat->p_exact, stat->b_exact);
-	info("big   slab use page : %u,\tbytes : %u",	stat->p_big,   stat->b_big);	
-	info("page slab use page  : %u,\tbytes : %u\n",	stat->p_page,  stat->b_page);				
+	info("small slab use page : %zu,\tbytes : %zu",	stat->p_small, stat->b_small);	
+	info("exact slab use page : %zu,\tbytes : %zu",	stat->p_exact, stat->b_exact);
+	info("big   slab use page : %zu,\tbytes : %zu",	stat->p_big,   stat->b_big);	
+	info("page slab use page  : %zu,\tbytes : %zu\n",	stat->p_page,  stat->b_page);				
 
-	info("max free pages : %u\n",		stat->max_free_pages);
+	info("max free pages : %zu\n",		stat->max_free_pages);
 }
