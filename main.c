@@ -15,25 +15,37 @@ int main(int argc, char **argv)
 	sp->min_shift = 3;
 	sp->end = space + pool_size;
 
-	/*
-	 * init
-	 */
 	ncx_slab_init(sp);
 
-	/*
-	 * alloc
-	 */
-	p = ncx_slab_alloc(sp, 128);
-
-	/*
-	 * show stat
-	 */
+	int i;
+	for (i = 0; i < 1000000; i++) 
+	{   
+		p = ncx_slab_alloc(sp, 128 + i); 
+		if (p == NULL) 
+		{   
+			printf("%d\n", i); 
+			return -1; 
+		}   
+		ncx_slab_free(sp, p); 
+	}   
 	ncx_slab_stat(sp, &stat);
 
-	/*
-	 * free
-	 */
-	ncx_slab_free(sp, p);
+	printf("##########################################################################\n");
+	for (i = 0; i < 2500; i++) 
+	{   
+		p = ncx_slab_alloc(sp, 30 + i); 
+		if (p == NULL) 
+		{   
+			printf("%d\n", i); 
+			return -1; 
+		}   
+		
+		if (i % 3 == 0) 
+		{
+			ncx_slab_free(sp, p);
+		}
+	}   
+	ncx_slab_stat(sp, &stat);
 
 	free(space);
 

@@ -35,9 +35,10 @@ int main(int argc, char **argv)
 	uint64_t us_end;
 	size_t size[] = { 30, 120, 256, 500, 1000, 2000, 3000, 5000};
 
-	printf("size\tncx\tmalloc\n");
+	printf("size\tncx\tmalloc\tpct\n");
 
 	int i, j;
+	uint64_t t1, t2;
 	for (j = 0; j < sizeof(size)/sizeof(size_t); j++) 
 	{
 		size_t s = size[j];
@@ -48,25 +49,30 @@ int main(int argc, char **argv)
 		for(i = 0; i < 1000000; i++) 
 		{
 			p = ncx_slab_alloc(sp, s);
+
 			ncx_slab_free(sp, p);
 		}
 		us_end  = usTime();
 
-		printf("%llu \t", (us_end - us_begin)/1000);
+		t1 = (us_end - us_begin);
+		printf("%llu \t", t1/1000);
 
 		// test for malloc
 		us_begin  = usTime();
 		for(i = 0; i < 1000000; i++) 
 		{
 			p = (char*)malloc(s);
+
 			free(p);
 		}
 		us_end  = usTime();
 
-		printf("%llu\n", (us_end - us_begin)/1000);
+		t2 = (us_end - us_begin);
+		printf("%llu\t", t2/1000);
+
+		printf("%.2f\n", (double)t1 / (double)t2);
 	}
 
-		
 	free(space);
 
 	return 0;
